@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AETHER // Cosmic Guardian</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-mode="mission">
+    <canvas id="starfield" aria-hidden="true"></canvas>
+    <div class="noise-layer" aria-hidden="true"></div>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <span class="eyebrow">NASA Earth Observation Game Prototype</span>
+          <h1>AETHER // Cosmic Guardian</h1>
+          <p>
+            Orbit Earth, read real observation layers, and rebalance the
+            biosphere before climate shocks, fire corridors, and orbital
+            threats cascade across the planet.
+          </p>
+        </div>
+
+        <div class="status-ribbon">
+          <article class="status-chip">
+            <span>Guardian Balance</span>
+            <strong id="guardianPercent">74%</strong>
+          </article>
+          <article class="status-chip">
+            <span>Threat Window</span>
+            <strong id="threatPercent">31%</strong>
+          </article>
+          <article class="status-chip">
+            <span>Uplink Power</span>
+            <strong id="powerPercent">88%</strong>
+          </article>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <aside class="panel panel--story">
+          <span class="panel-label">Mission Core</span>
+          <h2 id="missionTitle">Stormshield Atlantic</h2>
+          <p id="missionDescription">
+            Follow a moisture river across the North Atlantic and cut cyclone
+            landfall risk before the storm train amplifies.
+          </p>
+
+          <div id="objectiveList" class="objective-list"></div>
+
+          <div class="story-actions">
+            <button id="scanButton" class="action-button action-button--primary">
+              Execute Deep Scan
+            </button>
+            <button
+              id="interveneButton"
+              class="action-button action-button--secondary"
+            >
+              Launch Intervention
+            </button>
+          </div>
+
+          <div class="lesson-card">
+            <span class="panel-label">Interactive Science</span>
+            <p id="scienceLesson">
+              Atmosphere, hydrosphere, biosphere, cryosphere, and geosphere are
+              linked. Touch one system from orbit and the others answer back.
+            </p>
+          </div>
+        </aside>
+
+        <section class="viewport">
+          <div class="mode-strip" id="modeButtons"></div>
+
+          <div class="viewport-glass">
+            <div class="location-strip" id="locationButtons"></div>
+
+            <div class="system-stage" id="systemStage">
+              <div class="sun-flare" aria-hidden="true"></div>
+              <div class="orbit-ring orbit-ring--inner" aria-hidden="true"></div>
+              <div class="orbit-ring orbit-ring--mid" aria-hidden="true"></div>
+              <div class="orbit-ring orbit-ring--outer" aria-hidden="true"></div>
+              <div class="moon-track" aria-hidden="true">
+                <div class="moon"></div>
+              </div>
+
+              <div class="orbital-tag orbital-tag--left">
+                <span>Viewpoint</span>
+                <strong id="locationName">Low Earth Orbit</strong>
+              </div>
+              <div class="orbital-tag orbital-tag--right">
+                <span>Altitude</span>
+                <strong id="locationAltitude">408 km</strong>
+              </div>
+
+              <div class="earth-shell" id="earth">
+                <div class="earth-layer earth-layer--land"></div>
+                <div class="earth-layer earth-layer--glow"></div>
+                <div class="earth-layer earth-layer--clouds"></div>
+                <div class="earth-layer earth-layer--weather"></div>
+                <div class="earth-layer earth-layer--night"></div>
+                <div id="markerLayer" class="marker-layer"></div>
+                <div id="scanFlash" class="scan-flash" aria-hidden="true"></div>
+              </div>
+
+              <div id="satelliteLayer" class="satellite-layer"></div>
+
+              <div class="viewport-copy">
+                <span class="panel-label">Cosmic Guardian System</span>
+                <h3 id="modeNarrative">Mission mode prioritizes planet defense.</h3>
+                <p id="locationNarrative">
+                  Astronaut-eye view for precision scanning, disaster response,
+                  and satellite deployment over live Earth systems.
+                </p>
+              </div>
+            </div>
+
+            <section class="timeline-card">
+              <div class="timeline-heading">
+                <div>
+                  <span class="panel-label">Time Lensing</span>
+                  <h3 id="yearLabel">2036 Forecast Sweep</h3>
+                </div>
+                <button id="autoplayButton" class="pill-button">
+                  Fast-forward
+                </button>
+              </div>
+
+              <input
+                id="yearSlider"
+                class="timeline-slider"
+                type="range"
+                min="2026"
+                max="2100"
+                value="2036"
+              />
+
+              <div class="timeline-scale">
+                <span>2026</span>
+                <span>2050</span>
+                <span>2075</span>
+                <span>2100</span>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <aside class="panel panel--systems">
+          <span class="panel-label">Sensor Arrays</span>
+          <div id="scanModes" class="scan-mode-grid"></div>
+
+          <section class="systems-card">
+            <div class="systems-heading">
+              <h3>Earth Systems Integrity</h3>
+              <span id="systemsCaption">Linked from orbit</span>
+            </div>
+            <div id="systemsMeters" class="systems-meters"></div>
+          </section>
+
+          <section class="control-card">
+            <div class="controls-grid">
+              <button id="deployButton" class="action-button action-button--primary">
+                Deploy Satellite
+              </button>
+              <button id="rebalanceButton" class="action-button action-button--secondary">
+                Rebalance Systems
+              </button>
+              <button id="deflectButton" class="action-button action-button--secondary">
+                Deflect Threat
+              </button>
+            </div>
+          </section>
+
+          <section class="feed-card">
+            <span class="panel-label">NASA Feed Matrix</span>
+            <div id="datasetList" class="dataset-list"></div>
+          </section>
+        </aside>
+      </main>
+
+      <section class="intel-grid">
+        <article class="intel-card">
+          <span class="panel-label">Regional Scan</span>
+          <div id="regionCard" class="region-card"></div>
+        </article>
+
+        <article class="intel-card">
+          <span class="panel-label">Mission Queue</span>
+          <div id="missionQueue" class="mission-queue"></div>
+        </article>
+
+        <article class="intel-card">
+          <span class="panel-label">Sandbox Levers</span>
+          <div id="sandboxControls" class="sandbox-controls"></div>
+        </article>
+      </section>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
